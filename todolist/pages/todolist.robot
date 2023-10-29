@@ -4,13 +4,17 @@ Library           SeleniumLibrary
 *** Keywords ***
 Adição de Tarefas
     FOR    ${i}    IN RANGE    5
-    Input Text    css:.input-field textarea    Tarefa ${i}   # Inserindo o texto da tarefa
-    Press Keys    css:.input-field textarea    ENTER   # Pressionando a tecla 'Enter' para adicionar a tarefa
-    Wait Until Element Is Visible    css:li:last-child   # Aguardando até que a última tarefa seja visível
+    Input Text    css:.input-field textarea    Tarefa ${i}
+    Press Keys    css:.input-field textarea    ENTER
+    Wait Until Element Is Visible    css:li:last-child
     END
 
-    # Verificando se as tarefas foram adicionadas corretamente
     FOR    ${i}    IN RANGE    5
     Element Should Contain    css:li:nth-child(${i+1})    Tarefa ${i}
     END
-#Marcação de Tarefas Concluídas
+Marcação de Tarefas Concluídas
+    FOR    ${i}    IN RANGE    1    6
+    ${script}    Set Variable    return document.querySelectorAll('li.list.pending input[type="checkbox"]')[${i - 1}].checked = true;
+    Execute JavaScript    ${script}
+    END
+#Exclusão de Tarefas
