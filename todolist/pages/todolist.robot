@@ -28,3 +28,6 @@ Exclusão de Tarefas
         Click Element    css=li:nth-child(1) i.uil-trash
         Sleep    1s
     END
+Limpeza da lista de tarefas
+    Wait Until Element Is Visible    class=clear-button
+    Click Button    class=clear-button
