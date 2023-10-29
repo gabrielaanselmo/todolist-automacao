@@ -17,4 +17,11 @@ Marcação de Tarefas Concluídas
     ${script}    Set Variable    return document.querySelectorAll('li.list.pending input[type="checkbox"]')[${i - 1}].checked = true;
     Execute JavaScript    ${script}
     END
-#Exclusão de Tarefas
+Exclusão de Tarefas
+    ${trash_count}=    Get Element Count    css=i.uil-trash
+    FOR    ${INDEX}    IN RANGE    ${trash_count}
+        ${element}=    Get WebElement    css=li:nth-child(1)
+        Mouse Over    ${element}
+        Click Element    css=li:nth-child(1) i.uil-trash
+        Sleep    1s
+    END
